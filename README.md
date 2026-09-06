@@ -66,8 +66,14 @@ VLM3DSOD/
 
 ```bash
 python train.py
+```
 
+### Testing
+
+```bash
 python test.py
+```
+
 
 ## Citation
 
