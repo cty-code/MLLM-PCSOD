@@ -45,7 +45,7 @@
 
 ## Dataset
 
-数据集信息与下载方式将在论文整理完成后公开。
+You can download the PCSOD dataset from OpenDatasets and put them under the following directory:
 
 ## Code
 
