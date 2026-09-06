@@ -45,7 +45,7 @@
 
 ## Dataset
 
-You can download the PCSOD dataset from OpenDatasets and put them under the following directory:
+You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPointCloud/PCSOD) and place it in the following directory:
 
 ## Code
 
@@ -59,6 +59,15 @@ VLM3DSOD/
 ├── test.py
 └── requirements.txt
 ```
+
+## Running
+
+### Training
+
+```bash
+python train.py
+
+python test.py
 
 ## Citation
 
