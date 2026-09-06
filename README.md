@@ -54,10 +54,15 @@ You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPoin
 ```text
 VLM3DSOD/
 ├── data/
+│   ├── train/
+│   ├── val/
+│   └── test/
 ├── models/
 ├── train.py
 ├── test.py
-└── requirements.txt
+├── requirements.txt
+└── ...
+
 ```
 
 ## Running
