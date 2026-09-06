@@ -1,8 +1,6 @@
 <div align="center">
 
-# 基于视觉语言模型语义先验的三维点云显著物体检测方法
-
-### 3D Point Cloud Salient Object Detection with Semantic Priors from Vision-Language Models
+# 3D Point Cloud Salient Object Detection with Semantic Priors from Vision-Language Models
 
 **作者姓名¹　合作者姓名¹　指导教师¹**  
 ¹ 单位名称 · 学院或实验室
