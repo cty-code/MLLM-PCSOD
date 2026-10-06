@@ -50,10 +50,15 @@ You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPoin
 训练、测试代码和预训练模型将在整理完成后发布。
 
 ```text
-VLM3DSOD/
-├── data/
-│   ├── train/
-│   └── test/
+VLM3DSOD\
+├── data\
+│   ├── train\
+│   └── test\
+├── log\
+|   ├── pcsod_textguided\
+|       ├── logs\
+|       └── checkpoints\
+|           └── best_model.pth
 ├── models/
 ├── train.py
 ├── test.py
