@@ -1,6 +1,6 @@
 <div align="center">
 
-# 3D Point Cloud Salient Object Detection with Semantic Priors from Vision-Language Models
+# MLLM-PCSOD: A Semantic Prior-Driven Framework for Point Cloud Salient Object Detection via Multimodal Large Language Model
 
 **作者姓名¹　合作者姓名¹　指导教师¹**  
 ¹ 单位名称 · 学院或实验室
