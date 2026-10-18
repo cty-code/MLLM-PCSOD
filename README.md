@@ -24,7 +24,6 @@ Existing point cloud salient object detection methods all follow a purely data-d
 
 ## Method
 
-> **Method Framework**
 ![Overview of MLLM-PCSOD](fig1.png)
 
 MLLM-PCSOD consists of two branches:
@@ -37,8 +36,7 @@ MLLM-PCSOD consists of two branches:
 
 | Dataset | Metric 1 | Metric 2 | Metric 3 |
 |:-------:|:--------:|:--------:|:--------:|
-| Dataset A | — | — | — |
-| Dataset B | — | — | — |
+| PCSOD | — | — | — |
 
 ## Dataset
 
