@@ -24,8 +24,8 @@ Existing point cloud salient object detection methods all follow a purely data-d
 
 ## Method
 
-> **方法框架图**  
-> 后续上传框架图后，可将本段替换为：`![Method](fig1.jpg)`
+> **Method Framework**
+![Overview of MLLM-PCSOD](fig1.png)
 
 MLLM-PCSOD consists of two branches:
 1. **Semantic prior extraction branch：** The semantic prior extraction branch (top) employs a LoRA-fine-tuned LLaVA-OneVision and a frozen CLIP text encoder to produce saliency-related text features from the 2D point cloud projection.
