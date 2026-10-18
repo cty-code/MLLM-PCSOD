@@ -41,6 +41,12 @@ MLLM-PCSOD consists of two branches:
 | EPFNet  | **0.047** | 0.820 | 0.898 | 0.727 |
 | **MLLM-PCSOD** | 0.051 | **0.879** | **0.924** | **0.779** |
 
+### Qualitative Comparison
+
+![Qualitative comparison of MLLM-PCSOD with PointSal and PSOD-Net](fig2.png)
+
+**Figure 2.** Qualitative comparison of MLLM-PCSOD with PointSal and PSOD-Net. In each row, the blue and yellow text boxes present the human-annotated and LLaVA-predicted descriptions of the salient objects, respectively.
+
 ## Dataset
 
 You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPointCloud/PCSOD) and place it in the following directory:
