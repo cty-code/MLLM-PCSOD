@@ -91,5 +91,5 @@ python test.py
 
 ## Acknowledgement
 
-感谢所有为本研究提供帮助的项目、数据集及研究工作。详细致谢信息将在后续补充。
+Our codes are built upon [PointNeXt](https://github.com/guochengqian/PointNeXt) and [PCSOD](https://openi.pcl.ac.cn/OpenPointCloud/PCSOD).
 
