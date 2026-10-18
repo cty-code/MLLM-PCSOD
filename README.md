@@ -91,11 +91,6 @@ python test.py
 如果本工作对您的研究有所帮助，请引用：
 
 ```bibtex
-@article{vlm3dsod2026,
-  title  = {3D Point Cloud Salient Object Detection with Semantic Priors from Vision-Language Models},
-  author = {Author Name and Coauthor Name},
-  year   = {2026}
-}
 ```
 
 ## Acknowledgement
