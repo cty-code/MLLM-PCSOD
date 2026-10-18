@@ -5,7 +5,6 @@
 **Tianyu Cheng¹　Ziwei Luo¹、Zhaojing Wang¹、Xiaoyun Yan¹　Li Li¹**  
 ¹ Wuhan Textile University
 
-论文：*Coming Soon*　|　代码：*Coming Soon*　|　数据：*Coming Soon*
 
 </div>
 
