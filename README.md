@@ -32,11 +32,18 @@ MLLM-PCSOD consists of two branches:
 
 ## Results
 
-定量实验、消融实验和可视化结果将在完成后补充。
+### Quantitative Comparison on the PCSOD Dataset
 
-| Dataset | Metric 1 | Metric 2 | Metric 3 |
-|:-------:|:--------:|:--------:|:--------:|
-| PCSOD | — | — | — |
+| Method | MAE ↓ | F-measure ↑ | E-measure ↑ | IoU ↑ |
+|---|---:|---:|---:|---:|
+| PointSal [5] | 0.069 | 0.769 | 0.851 | 0.656 |
+| PSOD-Net [18] | 0.058 | 0.805 | 0.878 | 0.711 |
+| SFN [16] | 0.057 | 0.812 | 0.888 | 0.713 |
+| MSV-PCT [6] | 0.052 | 0.845 | 0.908 | 0.763 |
+| GeoEdgeFormer [8] | 0.050 | 0.827 | 0.891 | 0.732 |
+| EGTNet [19] | 0.049 | 0.840 | 0.905 | 0.760 |
+| EPFNet [21] | **0.047** | 0.820 | 0.898 | 0.727 |
+| **MLLM-PCSOD** | 0.051 | **0.879** | **0.924** | **0.779** |
 
 ## Dataset
 
