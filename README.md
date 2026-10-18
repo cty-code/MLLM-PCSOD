@@ -41,7 +41,7 @@ MLLM-PCSOD consists of two branches:
 | EPFNet  | **0.047** | 0.820 | 0.898 | 0.727 |
 | **MLLM-PCSOD** | 0.051 | **0.879** | **0.924** | **0.779** |
 
-### Qualitative Comparison
+### Visual Comparison
 
 ![Qualitative comparison of MLLM-PCSOD with PointSal and PSOD-Net](fig2.png)
 
