@@ -56,12 +56,12 @@ You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPoin
 训练、测试代码和预训练模型将在整理完成后发布。
 
 ```text
-VLM3DSOD\
+MLLM-PCSOD\
 ├── data\
 │   ├── train\
 │   └── test\
 ├── log\
-|   ├── pcsod_textguided\
+|   ├── MLLM-PCSOD\
 |       ├── logs\
 |       └── checkpoints\
 |           └── best_model.pth
