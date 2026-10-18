@@ -2,7 +2,7 @@
 
 # MLLM-PCSOD: A Semantic Prior-Driven Framework for Point Cloud Salient Object Detection via Multimodal Large Language Model
 
-**Li Li¹, Tianyu Cheng¹, Ziwei Luo¹, Zhaojing Wang¹, Xiaoyun Yan¹**  
+**Li Li, Tianyu Cheng, Ziwei Luo, Zhaojing Wang, Xiaoyun Yan**  
 School of Computer Science and Artificial Intelligence, Wuhan Textile University
 
 </div>
