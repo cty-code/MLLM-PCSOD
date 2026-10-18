@@ -17,20 +17,19 @@ Existing point cloud salient object detection methods all follow a purely data-d
 
 ## Highlights
 
-- 利用视觉语言模型提取开放词汇语义先验。
-- 融合二维语义信息与三维点云几何特征。
-- 在复杂三维场景中实现点级显著性预测。
+- We propose for the first time a novel semantic prior-driven paradigm for PCSOD task, which breaks through the fundamental limitation of existing purely data-driven paradigms through a top-down strategy of “semantic understanding first, then geometric segmentation.” Based on this paradigm, we design the MLLM-PCSOD model, offering a promising research direction for this field.
+- We design a dedicated saliency-aware prompt and instruction-tune a MLLM to output the categories of salient objects as text, providing MLLM-derived high-level semantic priors for PCSOD task.
+- We propose highly lightweight TGPA modules (only 0.097M trainable parameters in total) and a three-stage cross-modal alignment mechanism to inject textual semantic priors into saliency prediction.
+- Extensive experiments demonstrate the clear advantages of the proposed paradigm and model and reveal that PCSOD performance can be markedly improved at negligible cross-modal alignment cost.
 
 ## Method
 
-> **方法框架图即将补充。**  
+> **方法框架图**  
 > 后续上传框架图后，可将本段替换为：`![Method](fig1.jpg)`
 
-本方法主要包括以下三个阶段：
-
-1. **语义先验提取：** 利用视觉语言模型获取高层语义表征。
-2. **跨模态特征融合：** 对齐并融合语义信息与三维几何特征。
-3. **显著性预测：** 输出点级显著性检测结果。
+MLLM-PCSOD consists of two branches:
+1. **Semantic prior extraction branch：** The semantic prior extraction branch (top) employs a LoRA-fine-tuned LLaVA-OneVision and a frozen CLIP text encoder to produce saliency-related text features from the 2D point cloud projection.
+2. **Semantic prior-driven segmentation branch：** The semantic prior-driven segmentation branch (bottom) builds a PointNeXt-based network and injects the saliency-related text features at three key positions via the TGPA modules to predict saliency.
 
 ## Results
 
