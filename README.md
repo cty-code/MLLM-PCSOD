@@ -1,6 +1,6 @@
 <div align="center">
 
-# MLLM-PCSOD: A Semantic Prior-Driven Framework for Point Cloud Salient Object Detection via Multimodal Large Language Model
+# MLLM-PCSOD: A Semantic-Prior-Driven Framework for Point Cloud Salient Object Detection via a Multimodal Large Language Model
 
 **Li Li, Tianyu Cheng, Ziwei Luo, Zhaojing Wang, Xiaoyun Yan**  
 School of Computer Science and Artificial Intelligence, Wuhan Textile University
@@ -11,7 +11,7 @@ School of Computer Science and Artificial Intelligence, Wuhan Textile University
 
 ## Abstract
 
-Existing point cloud salient object detection methods all follow a purely data-driven paradigm, relying solely on local geometric and color features for bottom-up saliency inference. Lacking high-level semantic understanding, they commonly suffer  from  background  false  activation  and  object  omission  in complex  backgrounds,  for  small  objects,  and  in  low-contrast scenarios.  To  fundamentally  break  this  limitation,  we  propose a novel semantic prior-driven paradigm and design the MLLM-PCSOD model based on it, adopting a top-down strategy of “semantic understanding first, then geometric segmentation”. Specifically,  a  multimodal  large  language  model,  LLaVA-OneVision, is  efficiently  fine-tuned  with  saliency-aware  prompts  and  2D point  cloud  projection  to  parse  scene  semantics  and  output salient object category text; the corresponding text features then guide a PointNeXt-based structure to detect saliency through a lightweight text-guided point-wise  attention module  and three-stage cross-modal alignment mechanism. Comprehensive experiments  show  that  MLLM-PCSOD  outperforms  all  representative  methods  on  F-measure,  E-measure,  and  intersection  over union, validating the effectiveness of the semantic prior-driven paradigm and showing that saliency detection performance can be markedly improved at a negligible cross-modal alignment cost.
+Existing point cloud salient object detection methods all follow a purely data-driven paradigm, relying solely on local geometric and color features for bottom-up saliency inference. Lacking high-level semantic understanding, they commonly suffer  from  background  false  activation  and  object  omission  in complex  backgrounds,  for  small  objects,  and  in  low-contrast scenarios.  To  fundamentally  break  this  limitation,  we  propose a novel semantic-prior-driven paradigm and design the MLLM-PCSOD model based on it, adopting a top-down strategy of “semantic understanding first, then geometric segmentation”. Specifically,  a  multimodal  large  language  model,  LLaVA-OneVision, is  efficiently  fine-tuned  with  saliency-aware  prompts  and  2D point  cloud  projection  to  parse  scene  semantics  and  output salient object category text; the corresponding text features then guide a PointNeXt-based structure to detect saliency through a lightweight text-guided point-wise  attention module  and three-stage cross-modal alignment mechanism. Comprehensive experiments  show  that  MLLM-PCSOD  outperforms  all  representative  methods  on  F-measure,  E-measure,  and  intersection  over union, validating the effectiveness of the semantic-prior-driven paradigm and showing that saliency detection performance can be markedly improved at a negligible cross-modal alignment cost
 
 ## Highlights
 
