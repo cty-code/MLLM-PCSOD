@@ -16,7 +16,7 @@ Existing point cloud salient object detection methods all follow a purely data-d
 ## Highlights
 
 - We propose for the first time a novel semantic-prior-driven paradigm for PCSOD task, which breaks through the fundamental limitation of existing purely data-driven paradigms through a top-down strategy of “semantic understanding first, then geometric segmentation.” Based on this paradigm, we design the MLLM-PCSOD model, offering a promising research direction for this field.
-- We design a dedicated saliency-aware prompt and instruction-tune an MLLM to output the categories of salient objects as text, providing MLLM-derived high-level semantic priors for the PCSOD task.
+- We design a dedicated saliency-aware prompt and fine-tune an MLLM to output the categories of salient objects as text, providing MLLM-derived high-level semantic priors for the PCSOD task.
 - We propose highly lightweight TGPA modules (only 0.097M trainable parameters in total) and a three-stage cross-modal alignment mechanism to inject textual semantic priors into saliency prediction.
 - Extensive experiments demonstrate the clear advantages of the proposed paradigm and model and reveal that PCSOD performance can be markedly improved at negligible cross-modal alignment cost.
 
