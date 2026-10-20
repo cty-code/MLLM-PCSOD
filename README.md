@@ -55,8 +55,6 @@ You can download the PCSOD dataset from [OpenI](https://openi.pcl.ac.cn/OpenPoin
 
 ## Code
 
-训练、测试代码和预训练模型将在整理完成后发布。
-
 ```text
 MLLM-PCSOD\
 ├── data\
@@ -92,7 +90,7 @@ python test.py
 
 ## Citation
 
-如果本工作对您的研究有所帮助，请引用：
+If this work is helpful to your research, please cite:
 
 ```bibtex
 ```
