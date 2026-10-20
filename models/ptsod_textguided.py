@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import clip
 from easydict import EasyDict
 from pointnet2_utils import index_points, square_distance, PointNetFeaturePropagation
-from openpoints.models.backbone.pointnext import PointNextEncoder, PointNextDecoder
+from pointnext import PointNextEncoder, PointNextDecoder
 
 
 class PretrainedTextEncoder(nn.Module):
