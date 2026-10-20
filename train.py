@@ -13,7 +13,7 @@ MODELS_DIR = os.path.join(BASE_DIR, "models")
 if MODELS_DIR not in sys.path:
     sys.path.insert(0, MODELS_DIR)
 
-from datautils_best import PCSOD
+from datautils import PCSOD
 from utils import inplace_relu, bn_momentum_adjust
 from text_guided_runner import TextGuidedPSODRunner
 
