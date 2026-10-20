@@ -90,7 +90,7 @@ python test.py
 
 ## Citation
 
-If this work is helpful to your research, please cite:
+If you use this library, please kindly acknowledge our work
 
 ```bibtex
 ```
