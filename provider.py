@@ -139,7 +139,6 @@ def rotate_point_cloud_by_angle(batch_data, rotation_angle):
     """
     rotated_data = np.zeros(batch_data.shape, dtype=np.float32)
     for k in range(batch_data.shape[0]):
-        #rotation_angle = np.random.uniform() * 2 * np.pi
         cosval = np.cos(rotation_angle)
         sinval = np.sin(rotation_angle)
         rotation_matrix = np.array([[cosval, 0, sinval],
@@ -159,7 +158,6 @@ def rotate_point_cloud_by_angle_with_normal(batch_data, rotation_angle):
     """
     rotated_data = np.zeros(batch_data.shape, dtype=np.float32)
     for k in range(batch_data.shape[0]):
-        #rotation_angle = np.random.uniform() * 2 * np.pi
         cosval = np.cos(rotation_angle)
         sinval = np.sin(rotation_angle)
         rotation_matrix = np.array([[cosval, 0, sinval],
@@ -241,10 +239,10 @@ def random_scale_point_cloud(batch_data, scale_low=0.8, scale_high=1.25):
 def random_point_dropout(batch_pc, max_dropout_ratio=0.875):
     ''' batch_pc: BxNx3 '''
     for b in range(batch_pc.shape[0]):
-        dropout_ratio =  np.random.random()*max_dropout_ratio # 0~0.875
+        dropout_ratio =  np.random.random()*max_dropout_ratio
         drop_idx = np.where(np.random.random((batch_pc.shape[1]))<=dropout_ratio)[0]
         if len(drop_idx)>0:
-            batch_pc[b,drop_idx,:] = batch_pc[b,0,:] # set to the first point
+            batch_pc[b,drop_idx,:] = batch_pc[b,0,:]
     return batch_pc
 
 
