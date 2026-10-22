@@ -8,13 +8,12 @@ import torch
 import torch.nn.functional as F
 from tqdm import tqdm
 import open3d as o3d
+from datautils_best import PCSOD
+from text_guided_runner import TextGuidedPSODRunner
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
-
-from datautils import PCSOD
-from text_guided_runner import TextGuidedPSODRunner
 
 def parse_args():
     parser = argparse.ArgumentParser('Model Testing')
@@ -268,16 +267,6 @@ def main(args):
                 logger.info(f"Scene: {scene_name} | MAE: {mae:.4f}")
 
         avg_mae = float(np.mean(mae_list)) if mae_list else float("nan")
-
-        if metric_scene_count:
-            mean_f_curve = f_curve_sum / metric_scene_count
-            mean_e_curve = e_curve_sum / metric_scene_count
-            mean_iou_curve = iou_curve_sum / metric_scene_count
-            max_f = mean_f_curve.max().item()
-            max_e = mean_e_curve.max().item()
-            max_iou = mean_iou_curve.max().item()
-        else:
-            max_f = max_e = max_iou = float("nan")
 
         log_string("\n" + "=" * 50)
         log_string(f"MAE: {avg_mae:.6f}")
