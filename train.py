@@ -158,7 +158,7 @@ def main(args):
         )
     if args.resume:
         if not best_model_path.exists():
-            raise FileNotFoundError(f'指定了 --resume，但存档不存在：{best_model_path}')
+            raise FileNotFoundError(f'Archive does not exist：{best_model_path}')
         start_epoch, best_train_mae = restore_checkpoint(best_model_path)
 
     for epoch in range(start_epoch, args.epoch):
@@ -246,7 +246,7 @@ def main(args):
                 'optimizer_state_dict': optimizer.state_dict(),
                 'best_train_mae': best_train_mae,
             }, savepath)
-        if (epoch + 1) % 200 == 0:
+        if (epoch + 1) % 50 == 0:
             savepath = checkpoints_dir / f'model_epoch_{epoch+1}.pth'
             torch.save({
                 'epoch': epoch + 1,
