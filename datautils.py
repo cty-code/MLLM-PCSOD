@@ -79,7 +79,6 @@ class PCSOD(Dataset):
         else:
             coord_min = self.scene_coord_min[item]
             coord_max = self.scene_coord_max[item]
-        # ============================================================
 
         N_all = full_pts.shape[0]
 
@@ -89,8 +88,8 @@ class PCSOD(Dataset):
         
         sampled_idx = idx[:self.num_point] if N_all >= self.num_point else idx
 
-        local_pts6 = full_pts[sampled_idx]      # (<=4096, 6)
-        local_lbls = full_lbl[sampled_idx]      # (<=4096, )
+        local_pts6 = full_pts[sampled_idx]     
+        local_lbls = full_lbl[sampled_idx]     
 
         nloc = local_pts6.shape[0]
         
