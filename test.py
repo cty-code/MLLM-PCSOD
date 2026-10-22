@@ -8,7 +8,7 @@ import torch
 import torch.nn.functional as F
 from tqdm import tqdm
 import open3d as o3d
-from datautils_best import PCSOD
+from datautils import PCSOD
 from text_guided_runner import TextGuidedPSODRunner
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
