@@ -25,8 +25,8 @@ Existing point cloud salient object detection methods all follow a purely data-d
 ![Overview of MLLM-PCSOD](fig1.png)
 
 MLLM-PCSOD consists of two branches:
-1. **Semantic prior extraction branch：** It (top) employs a LoRA-fine-tuned LLaVA-OneVision and a frozen CLIP text encoder to produce saliency-related text features from the point cloud projection.
-2. **Semantic prior-driven segmentation branch：** It (bottom) builds a PointNeXt-based network and injects the saliency-related text features at three key positions via the TGPA modules to predict saliency.
+1. **Semantic prior extraction branch：** It (top) employs a LoRA-fine-tuned LLaVA-OneVision and a frozen CLIP text encoder to produce saliency-related text features from the 2D point cloud projection.
+2. **Semantic-prior-driven segmentation branch：** It (bottom) builds a PointNeXt-based network and injects the saliency-related text features at three key positions via the TGPA modules to predict saliency.
 
 ## Results
 
