@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
 
-from datautils_best import PCSOD
+from datautils import PCSOD
 from text_guided_runner import TextGuidedPSODRunner
 
 def parse_args():
