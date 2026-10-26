@@ -10,7 +10,6 @@ from tqdm import tqdm
 import open3d as o3d
 from datautils import PCSOD
 from text_guided_runner import TextGuidedPSODRunner
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
@@ -29,7 +28,6 @@ def parse_args():
 
 def _stem(name: str) -> str: return os.path.splitext(name)[0]
 
-
 @torch.no_grad()
 def compute_metric_curves(pred, gt, num_thresholds=255):
     pred = pred.reshape(-1)
@@ -40,7 +38,6 @@ def compute_metric_curves(pred, gt, num_thresholds=255):
     iou_scores = torch.zeros_like(f_scores)
     beta2 = 0.3
     centered_gt = gt - gt.mean()
-
     for i, threshold in enumerate(thresholds):
         binary_pred = (pred >= threshold).float()
         tp = (binary_pred * gt).sum()
@@ -48,18 +45,15 @@ def compute_metric_curves(pred, gt, num_thresholds=255):
         recall = tp / (gt.sum() + 1e-20)
         f_score = (1 + beta2) * precision * recall / (beta2 * precision + recall)
         f_scores[i] = torch.where(torch.isnan(f_score), torch.zeros_like(f_score), f_score)
-
         centered_pred = binary_pred - binary_pred.mean()
         alignment = 2 * centered_gt * centered_pred / (
             centered_gt * centered_gt + centered_pred * centered_pred + 1e-20
         )
         enhanced = ((alignment + 1) * (alignment + 1)) / 4
         e_scores[i] = enhanced.sum() / (gt.numel() - 1 + 1e-20)
-
         intersection = ((binary_pred == 1) & (gt == 1)).sum()
         union = ((binary_pred == 1) | (gt == 1)).sum()
         iou_scores[i] = intersection / union
-
     return f_scores, e_scores, iou_scores
 
 
@@ -69,44 +63,31 @@ def main(args):
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
     torch.set_num_threads(6)
-
     experiment_dir = Path('log') / args.log_dir
     logger = logging.getLogger("Test")
     logger.setLevel(logging.INFO)
-    
     logger.propagate = False
-    
     file_handler = logging.FileHandler(experiment_dir / 'test.txt')
     file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(message)s'))
     logger.addHandler(file_handler)
-
+    
     def log_string(str): logger.info(str); print(str)
-
-    log_string('PARAMETER ...\n' + str(args))
     NUM_POINT, NUM_CLASSES, NUM_VOTE = args.num_point, 2, args.num_votes
-
     TEST_DATASET = PCSOD(split='test', data_root=args.data_root, num_point=NUM_POINT, transform=None)
     test_loader = torch.utils.data.DataLoader(
         TEST_DATASET, batch_size=1, shuffle=False,
         num_workers=10, pin_memory=True, drop_last=False,
         persistent_workers=True
     )
-
     classifier = TextGuidedPSODRunner(num_classes=NUM_CLASSES, device="cuda").to(device)
-    
-    model_path = experiment_dir / 'checkpoints' / 'best_model.pth'
-    if model_path.exists():
-        checkpoint = torch.load(model_path, map_location=device)
-        state_dict = checkpoint.get('model_state_dict', checkpoint)
-        if any(key.startswith('seg_model.') for key in state_dict):
-            classifier.load_state_dict(state_dict)
-        else:
-            classifier.seg_model.load_state_dict(state_dict)
-        log_string(f"Loaded model from {model_path}")
+    model_path = experiment_dir / 'checkpoints' / '.pth'
+    checkpoint = torch.load(model_path, map_location=device)
+    state_dict = checkpoint.get('model_state_dict', checkpoint)
+
+    if any(key.startswith('seg_model.') for key in state_dict):
+        classifier.load_state_dict(state_dict)
     else:
-        raise FileNotFoundError(f"Checkpoint not found: {model_path}")
-
-
+        classifier.seg_model.load_state_dict(state_dict)
     classifier.eval()
     with torch.no_grad():
         mae_list = []
@@ -151,8 +132,8 @@ def main(args):
                 
                 norm_xyz = (xyz - c_min) / (c_max - c_min + 1e-6)
                 
-                center = (c_min + c_max) / 2.0
-                xyz = xyz - center
+                xyz[:, :, 0] -= c_max[:, :, 0] / 2.0
+                xyz[:, :, 1] -= c_max[:, :, 1] / 2.0
                 
                 if _ > 0:
                     flip_x = (torch.rand(xyz.shape[0], device=device) > 0.5).float() * 2 - 1.0
