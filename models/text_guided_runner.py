@@ -17,12 +17,8 @@ class TextGuidedPSODRunner(nn.Module):
         self.seg_model = get_seg_model(num_classes=num_classes).to(self.device)
 
     def _get_prompt_from_txt(self, txt_path: str) -> str:
-        if not os.path.exists(txt_path):
-            raise FileNotFoundError(f"找不到对应的文本文件 {txt_path}！请检查你的数据集。")
         with open(txt_path, "r", encoding="utf-8", errors="ignore") as f:
             text = f.read().strip().rstrip('.')
-            if not text:
-                raise ValueError(f"文本文件内容为空 {txt_path}！请补充文本。")
             return text
 
     def forward(self, x9_4096: torch.Tensor, pc_240k: torch.Tensor, 
