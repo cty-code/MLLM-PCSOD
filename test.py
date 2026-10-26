@@ -132,8 +132,8 @@ def main(args):
                 
                 norm_xyz = (xyz - c_min) / (c_max - c_min + 1e-6)
                 
-                xyz[:, :, 0] -= c_max[:, :, 0] / 2.0
-                xyz[:, :, 1] -= c_max[:, :, 1] / 2.0
+                center = (c_min + c_max) / 2.0
+                xyz = xyz - center
                 
                 if _ > 0:
                     flip_x = (torch.rand(xyz.shape[0], device=device) > 0.5).float() * 2 - 1.0
