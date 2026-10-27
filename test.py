@@ -22,40 +22,10 @@ def parse_args():
     parser.add_argument('--log_dir', type=str, default='MLLM-PCSOD')
     parser.add_argument('--num_votes', type=int, default=4)
     parser.add_argument('--test_batch_size', type=int, default=16)
-    parser.add_argument('--txt_test_dir', type=str, default='./data/text/test')
-    parser.add_argument('--pcsod_ckpt', type=str, default='')
+    parser.add_argument('--txt_test_dir', type=str, default='./text/test')
     return parser.parse_args()
 
 def _stem(name: str) -> str: return os.path.splitext(name)[0]
-
-@torch.no_grad()
-def compute_metric_curves(pred, gt, num_thresholds=255):
-    pred = pred.reshape(-1)
-    gt = gt.reshape(-1).float()
-    thresholds = torch.linspace(0, 1 - 1e-10, num_thresholds, device=pred.device)
-    f_scores = torch.zeros(num_thresholds, device=pred.device)
-    e_scores = torch.zeros_like(f_scores)
-    iou_scores = torch.zeros_like(f_scores)
-    beta2 = 0.3
-    centered_gt = gt - gt.mean()
-    for i, threshold in enumerate(thresholds):
-        binary_pred = (pred >= threshold).float()
-        tp = (binary_pred * gt).sum()
-        precision = tp / (binary_pred.sum() + 1e-20)
-        recall = tp / (gt.sum() + 1e-20)
-        f_score = (1 + beta2) * precision * recall / (beta2 * precision + recall)
-        f_scores[i] = torch.where(torch.isnan(f_score), torch.zeros_like(f_score), f_score)
-        centered_pred = binary_pred - binary_pred.mean()
-        alignment = 2 * centered_gt * centered_pred / (
-            centered_gt * centered_gt + centered_pred * centered_pred + 1e-20
-        )
-        enhanced = ((alignment + 1) * (alignment + 1)) / 4
-        e_scores[i] = enhanced.sum() / (gt.numel() - 1 + 1e-20)
-        intersection = ((binary_pred == 1) & (gt == 1)).sum()
-        union = ((binary_pred == 1) | (gt == 1)).sum()
-        iou_scores[i] = intersection / union
-    return f_scores, e_scores, iou_scores
-
 
 def main(args):
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
@@ -91,10 +61,6 @@ def main(args):
     classifier.eval()
     with torch.no_grad():
         mae_list = []
-        f_curve_sum = torch.zeros(255, device=device)
-        e_curve_sum = torch.zeros(255, device=device)
-        iou_curve_sum = torch.zeros(255, device=device)
-        metric_scene_count = 0
         
         for batch in tqdm(test_loader, total=len(test_loader), smoothing=0.9):
             local_pts, local_lbl, full_pts, full_lbl, coord_min, coord_max, scene_names = batch
@@ -239,11 +205,6 @@ def main(args):
             
             if not np.isnan(mae):
                 mae_list.append(mae)
-                f_curve, e_curve, iou_curve = compute_metric_curves(final_pred, target_1)
-                f_curve_sum += f_curve
-                e_curve_sum += e_curve
-                iou_curve_sum += iou_curve
-                metric_scene_count += 1
 
                 logger.info(f"Scene: {scene_name} | MAE: {mae:.4f}")
 
