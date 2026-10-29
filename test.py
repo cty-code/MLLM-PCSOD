@@ -27,6 +27,34 @@ def parse_args():
 
 def _stem(name: str) -> str: return os.path.splitext(name)[0]
 
+@torch.no_grad()
+def compute_metric_curves(pred, gt, num_thresholds=255):
+    pred = pred.reshape(-1)
+    gt = gt.reshape(-1).float()
+    thresholds = torch.linspace(0, 1 - 1e-10, num_thresholds, device=pred.device)
+    f_scores = torch.zeros(num_thresholds, device=pred.device)
+    e_scores = torch.zeros_like(f_scores)
+    iou_scores = torch.zeros_like(f_scores)
+    beta2 = 0.3
+    centered_gt = gt - gt.mean()
+    for i, threshold in enumerate(thresholds):
+        binary_pred = (pred >= threshold).float()
+        tp = (binary_pred * gt).sum()
+        precision = tp / (binary_pred.sum() + 1e-20)
+        recall = tp / (gt.sum() + 1e-20)
+        f_score = (1 + beta2) * precision * recall / (beta2 * precision + recall)
+        f_scores[i] = torch.where(torch.isnan(f_score), torch.zeros_like(f_score), f_score)
+        centered_pred = binary_pred - binary_pred.mean()
+        alignment = 2 * centered_gt * centered_pred / (
+            centered_gt * centered_gt + centered_pred * centered_pred + 1e-20
+        )
+        enhanced = ((alignment + 1) * (alignment + 1)) / 4
+        e_scores[i] = enhanced.sum() / (gt.numel() - 1 + 1e-20)
+        intersection = ((binary_pred == 1) & (gt == 1)).sum()
+        union = ((binary_pred == 1) | (gt == 1)).sum()
+        iou_scores[i] = intersection / union
+    return f_scores, e_scores, iou_scores
+    
 def main(args):
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
